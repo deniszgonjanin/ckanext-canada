@@ -1,0 +1,8 @@
+{% ckan_extends %}
+
+{% import 'macros/canada_read.html' as cr %}
+
+{% block extra_facets %}
+  {{ h.snippet('snippets/published_pending_facet.html', title=c.facet_titles['ready_to_publish'],
+    name='ready_to_publish') }}
+{% endblock %}

@@ -29,7 +29,8 @@ class DataGCCAInternal(p.SingletonPlugin):
     def dataset_facets(self, facets_dict, package_type):
         ''' Update the facets_dict and return it. '''
 
-        facets_dict.update({'published': _('Published or Pending')})
+        facets_dict.update({'ready_to_publish': _('Ready to Publish'),
+                            })
 
         return facets_dict
 
@@ -47,7 +48,7 @@ class DataGCCAInternal(p.SingletonPlugin):
                       'catalog_type': _('Data Type'),
                       'subject': _('Subject'),
                       'ready_to_publish': _('Ready to Publish'),
-                      'license_id': _('Licence') }
+                      'license_id': _('Licence'), }
 
         return facets_dict
 
@@ -96,8 +97,7 @@ class DataGCCAPublic(p.SingletonPlugin):
                       'catalog_type': _('Data Type'),
                       'subject': _('Subject'),
                       'organization': _('Organization'),
-                      'ready_to_publish': _('Ready to Publish'),
-                      'license_id': _('Licence') }
+                      'license_id': _('Licence'), }
 
         return facets_dict
 
@@ -244,6 +244,9 @@ class DataGCCAPackageController(p.SingletonPlugin):
         
         if 'extras_ready_to_publish' in data_dict and data_dict['extras_ready_to_publish'] == 'true':
             data_dict['ready_to_publish'] = 'true'
+            
+        if 'extras_portal_release_date' in data_dict:
+            data_dict['release_date'] = data_dict['extras_portal_release_date']
         
         return data_dict
 
